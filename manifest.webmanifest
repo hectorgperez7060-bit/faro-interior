@@ -1,0 +1,11 @@
+{
+  "name": "Faro Interior",
+  "short_name": "Faro",
+  "description": "Una brújula personal contextual.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#100d1d",
+  "theme_color": "#151128",
+  "lang": "es",
+  "icons": []
+}

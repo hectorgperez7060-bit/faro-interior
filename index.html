@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151128">
+  <meta name="description" content="Faro Interior, una brújula personal contextual.">
+  <title>Faro Interior — prototipo</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+
+  <main class="app-shell" aria-live="polite">
+    <header class="topbar">
+      <button class="brand" data-go="hoy" aria-label="Ir a Hoy">
+        <span class="brand-mark">✦</span>
+        <span><strong>FARO</strong><small>interior</small></span>
+      </button>
+      <button class="memory-pill" id="memoryButton" aria-label="Ver memoria">
+        <span class="pulse-dot"></span><span id="memoryCount">3 recuerdos</span>
+      </button>
+    </header>
+
+    <section class="screen active" id="screen-hoy" data-screen="hoy">
+      <div class="hero">
+        <p class="eyebrow" id="todayLabel">TU MOMENTO · HOY</p>
+        <h1 id="greeting">Buen día, caminante.</h1>
+        <p class="hero-copy">No hace falta resolver todo. Empecemos por escuchar qué está pasando.</p>
+      </div>
+
+      <article class="card pulse-card">
+        <div class="card-heading">
+          <div><span class="kicker">PULSO</span><h2>¿Cómo estás de verdad?</h2></div>
+          <span class="duration">1 min</span>
+        </div>
+        <div class="moods" id="moodOptions">
+          <button data-mood="En calma" aria-label="En calma"><span>◡</span>En calma</button>
+          <button data-mood="Con energía" aria-label="Con energía"><span>✦</span>Con energía</button>
+          <button data-mood="Confundido/a" aria-label="Confundido o confundida"><span>≈</span>Confusión</button>
+          <button data-mood="Con peso" aria-label="Con peso"><span>◒</span>Con peso</button>
+        </div>
+        <label for="pulseText">¿Qué ocupa más espacio en tu cabeza?</label>
+        <textarea id="pulseText" rows="3" placeholder="Podés escribirlo con tus palabras…"></textarea>
+        <button class="primary" id="savePulse">Escuchar mi momento</button>
+      </article>
+
+      <article class="card orientation-card" id="orientationCard">
+        <div class="orientation-icon">⌁</div>
+        <div>
+          <span class="kicker">ORIENTACIÓN DE HOY</span>
+          <h2 id="orientationTitle">Primero, elegí cómo estás</h2>
+          <p id="orientationText">Tu orientación se construirá con tu pulso, tus metas y el contexto que hayas autorizado.</p>
+          <div class="source-row"><span>Dato</span><span>Interpretación</span><span>Tu decisión</span></div>
+        </div>
+      </article>
+
+      <div class="section-title"><div><span class="kicker">PRÓXIMO PASO</span><h2>Algo posible para hoy</h2></div></div>
+      <article class="action-card">
+        <button class="check" id="actionCheck" aria-label="Marcar paso como realizado">✓</button>
+        <div><strong id="nextAction">Reservá 10 minutos sin pantalla para ordenar una idea.</strong><p>Pequeño, concreto y elegido por vos.</p></div>
+      </article>
+    </section>
+
+    <section class="screen" id="screen-companero" data-screen="companero">
+      <div class="page-intro"><span class="kicker">COMPAÑERO</span><h1>Hablemos con profundidad.</h1><p>Estoy para ayudarte a pensar, no para decidir por vos.</p></div>
+      <div class="context-strip"><span>✦</span><p><strong>Estoy teniendo en cuenta:</strong> tu pulso de hoy, tu intención principal y lo que autorizaste recordar.</p></div>
+      <div class="chat" id="chatList">
+        <div class="message guide"><span class="message-author">Faro</span><p>¿Qué tema sentís que venís postergando aunque sabés que merece atención?</p></div>
+      </div>
+      <form class="composer" id="chatForm">
+        <textarea id="chatInput" rows="1" placeholder="Contame qué está pasando…" required></textarea>
+        <button type="submit" aria-label="Enviar">↑</button>
+      </form>
+      <p class="safety-note">Faro acompaña y ayuda a reflexionar; no reemplaza atención profesional.</p>
+    </section>
+
+    <section class="screen" id="screen-camino" data-screen="camino">
+      <div class="page-intro"><span class="kicker">CAMINO</span><h1>Lo que importa no se pierde.</h1><p>Metas humanas, pasos pequeños y una mirada honesta.</p></div>
+      <article class="card intention-card">
+        <div class="symbol">◎</div><div><span class="kicker">INTENCIÓN CENTRAL</span><h2 id="intentionDisplay">Recuperar claridad para tomar decisiones</h2><p id="intentionWhy">Avanzar sin actuar desde el apuro.</p></div>
+      </article>
+      <div class="section-title"><div><span class="kicker">ESTA SEMANA</span><h2>Tres movimientos</h2></div><span class="counter" id="stepsCounter">0/3</span></div>
+      <div class="steps" id="weeklySteps">
+        <button data-step="0"><span class="step-check">✓</span><span><strong>Nombrar la decisión pendiente</strong><small>Sin resolverla todavía</small></span></button>
+        <button data-step="1"><span class="step-check">✓</span><span><strong>Hablar con alguien de confianza</strong><small>Escuchar otra perspectiva</small></span></button>
+        <button data-step="2"><span class="step-check">✓</span><span><strong>Elegir el siguiente paso</strong><small>Solo uno, realizable</small></span></button>
+      </div>
+      <article class="card mirror-card">
+        <span class="kicker">ESPEJO SEMANAL · VISTA PREVIA</span>
+        <blockquote>“Cuando bajás la exigencia, aparece más claridad. Esta semana tu avance no fue tener todas las respuestas, sino formular una pregunta más honesta.”</blockquote>
+        <button class="secondary" id="openMirror">Ver mi espejo</button>
+      </article>
+    </section>
+
+    <section class="screen" id="screen-diario" data-screen="diario">
+      <div class="page-intro"><span class="kicker">DIARIO</span><h1>Un lugar para escucharte.</h1><p>Privado, sin puntuaciones ni obligación de escribir bien.</p></div>
+      <article class="card journal-compose">
+        <label for="journalText">¿Qué necesitás dejar por escrito?</label>
+        <textarea id="journalText" rows="7" placeholder="Hoy me di cuenta de que…"></textarea>
+        <div class="journal-actions"><span id="journalPrivacy">◉ Guardado solo en este dispositivo</span><button class="primary compact" id="saveJournal">Guardar</button></div>
+      </article>
+      <div class="section-title"><div><span class="kicker">ENTRADAS</span><h2>Tu recorrido reciente</h2></div></div>
+      <div id="journalEntries" class="entries"><p class="empty">Todavía no escribiste una entrada. Este espacio empieza cuando vos quieras.</p></div>
+    </section>
+
+    <section class="screen" id="screen-almas" data-screen="almas">
+      <div class="page-intro"><span class="kicker">ALMAS</span><h1>Símbolos para mirar distinto.</h1><p>Una capa espiritual opcional. Nunca se presenta como certeza.</p></div>
+      <article class="card almas-feature">
+        <div class="moon">◐</div><span class="kicker">PREGUNTA SIMBÓLICA</span><h2>¿Qué parte de vos necesita más espacio?</h2><p>Usá la imagen como disparador. El significado final siempre es tuyo.</p><button class="secondary" id="symbolButton">Abrir una carta de reflexión</button>
+      </article>
+      <div class="lens-grid">
+        <button data-lens="Astrología"><span>☼</span><strong>Astrología</strong><small>Patrones simbólicos</small></button>
+        <button data-lens="Tarot"><span>✧</span><strong>Tarot</strong><small>Preguntas y arquetipos</small></button>
+        <button data-lens="Rituales"><span>♨</span><strong>Rituales</strong><small>Pausas con intención</small></button>
+        <button data-lens="Creencias"><span>∞</span><strong>Mis creencias</strong><small>Elegidas por vos</small></button>
+      </div>
+      <div class="clarity-note"><strong>Siempre distinguimos</strong><div><span>Dato verificable</span><span>Lectura personal</span><span>Símbolo</span></div></div>
+    </section>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button class="nav-item active" data-go="hoy"><span>⌂</span><small>Hoy</small></button>
+      <button class="nav-item" data-go="companero"><span>◌</span><small>Compañero</small></button>
+      <button class="nav-item" data-go="camino"><span>⌁</span><small>Camino</small></button>
+      <button class="nav-item" data-go="diario"><span>□</span><small>Diario</small></button>
+      <button class="nav-item" data-go="almas"><span>✦</span><small>Almas</small></button>
+    </nav>
+  </main>
+
+  <div class="modal hidden" id="onboardingModal" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
+    <div class="modal-card onboarding">
+      <div class="onboarding-mark">✦</div><span class="kicker">PRIMER ENCUENTRO</span><h1 id="onboardingTitle">Una brújula empieza por conocerte.</h1><p>No buscamos etiquetarte. Solo entender qué necesitás hoy.</p>
+      <div class="onboarding-step active" data-ob-step="1"><label for="personName">¿Cómo querés que te llamemos?</label><input id="personName" placeholder="Tu nombre o apodo" autocomplete="name"><label for="personMoment">¿Qué estás atravesando?</label><select id="personMoment"><option value="un cambio importante">Un cambio importante</option><option value="una decisión difícil">Una decisión difícil</option><option value="una etapa de búsqueda">Una etapa de búsqueda</option><option value="un momento de cansancio">Un momento de cansancio</option><option value="ganas de conocerme mejor">Ganas de conocerme mejor</option></select></div>
+      <div class="onboarding-step" data-ob-step="2"><label for="personIntention">¿Qué te gustaría recuperar o construir?</label><textarea id="personIntention" rows="4" placeholder="Por ejemplo: claridad, confianza, equilibrio…">Recuperar claridad para tomar decisiones</textarea><label>¿Qué lugar querés dar a lo espiritual?</label><div class="choice-row" id="spiritualChoice"><button data-value="opcional" class="chosen">Opcional</button><button data-value="importante">Importante</button><button data-value="ninguno">Ninguno</button></div></div>
+      <div class="onboarding-step" data-ob-step="3"><label>Vos controlás la memoria</label><div class="consent"><span>✓</span><p><strong>Recordar metas y preferencias</strong><small>Podrás verlas, corregirlas o borrarlas.</small></p></div><div class="consent"><span>✓</span><p><strong>Preguntar antes de usar datos sensibles</strong><small>Ubicación, calendario y creencias van por separado.</small></p></div><p class="privacy-copy">En este prototipo los datos quedan únicamente en este navegador.</p></div>
+      <div class="progress-dots"><span class="active"></span><span></span><span></span></div>
+      <button class="primary" id="onboardingNext">Continuar</button>
+      <button class="text-button" id="skipOnboarding">Entrar con datos de demostración</button>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="detailModal" role="dialog" aria-modal="true">
+    <div class="modal-card detail"><button class="modal-close" id="closeDetail" aria-label="Cerrar">×</button><div id="detailContent"></div></div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
